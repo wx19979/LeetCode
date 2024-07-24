@@ -6,7 +6,7 @@ import (
 )
 
 // 找出数组中唯一的单个数字的函数
-func singleNumber(nums []int) int {
+func singleNumber1(nums []int) int {
 	sort.Ints(nums) //首先给数组排序
 	n := len(nums)  //获取数组的长度
 	if n == 1 {     //如果数组只有一个元素直接返回该元素
@@ -29,9 +29,24 @@ func singleNumber(nums []int) int {
 	return -100000000 //如果找不到直接返回一个无意义的数字
 }
 
+// 利用异或运算找出唯一的一个不重复元素
+// 任何数和 0 做异或运算，结果仍然是原来的数，即 a⊕0=a。
+// 任何数和其自身做异或运算，结果是 0，即 a⊕a=0。
+// 异或运算满足交换律和结合律，即 a⊕b⊕a=b⊕a⊕a=b⊕(a⊕a)=b⊕0=b。
+func singleNumber2(nums []int) int {
+	single := 0                //初始化用于存储结果的变量
+	for _, num := range nums { //逐个的遍历
+		single ^= num //通过异或操作筛选出唯一不重复的元素
+	}
+	return single //返回元素
+}
+
 // 利用异或运算求出数组
 func main() {
-	nums := []int{1}
-	num := singleNumber(nums)
-	fmt.Println(num)
+	nums1 := []int{1}
+	num1 := singleNumber1(nums1)
+	fmt.Println(num1)
+	nums2 := []int{2, 2, 1}
+	num2 := singleNumber2(nums2)
+	fmt.Println(num2)
 }
