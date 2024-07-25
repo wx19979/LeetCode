@@ -1,9 +1,12 @@
 // 两个数组的交集二
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
-//用于查找两个数组的交集函数,利用哈希表
+// 用于查找两个数组的交集函数,利用哈希表
 func intersect1(nums1 []int, nums2 []int) []int {
 	result := []int{}                    //创建一个存储结果的数集
 	len1, len2 := len(nums1), len(nums2) //获取两数组的长度
@@ -28,10 +31,31 @@ func intersect1(nums1 []int, nums2 []int) []int {
 	return result //返回结果集
 }
 
-//利用双指针排序方式查找并集
+// 利用双指针排序方式查找并集
+func intersect2(nums1 []int, nums2 []int) []int {
+	result := []int{} //创建一个存储结果的数集
+	//首先先将两个数组进行排序
+	sort.Ints(nums1)
+	sort.Ints(nums2)
+	for pN1, pN2 := 0, 0; pN1 < len(nums1) && pN2 < len(nums2); { //创建指针指向两个数组的头部并进行循环
+		if nums1[pN1] == nums2[pN2] { //如果出现相等的情况两指针同时向后挪
+			result = append(result, nums1[pN1]) //相等的情况直接加入结果集
+			pN1++                               //两个指针分别后移
+			pN2++
+		} else if nums1[pN1] < nums2[pN2] { //如果第一个数组值小于第二个数组值
+			pN1++ //移动第一个数组的指针
+		} else { //否则移动第二个数组的指针
+			pN2++
+		}
+	}
+	return result //最后返回结果集
+}
 
 func main() {
 	nums1, nums2 := []int{4, 9, 5}, []int{9, 4, 9, 8, 4} //创建用于测试的数组
-	result := intersect1(nums1, nums2)                   //调用测试
-	fmt.Println(result)                                  //输出结果
+	result1 := intersect1(nums1, nums2)                  //调用测试
+	fmt.Println(result1)                                 //输出结果
+	nums3, nums4 := []int{4, 9, 5}, []int{9, 4, 9, 8, 4} //创建用于测试的数组
+	result2 := intersect2(nums3, nums4)                  //调用测试
+	fmt.Println(result2)                                 //输出结果
 }
