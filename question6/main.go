@@ -3,8 +3,8 @@ package main
 
 import "fmt"
 
-// //用于查找两个数组的交集函数,利用哈希表
-func intersect(nums1 []int, nums2 []int) []int {
+//用于查找两个数组的交集函数,利用哈希表
+func intersect1(nums1 []int, nums2 []int) []int {
 	result := []int{}                    //创建一个存储结果的数集
 	len1, len2 := len(nums1), len(nums2) //获取两数组的长度
 	longlen, shortlen := len1, len2      //先赋值长度(默认第一个数组长)
@@ -28,8 +28,10 @@ func intersect(nums1 []int, nums2 []int) []int {
 	return result //返回结果集
 }
 
+//利用双指针排序方式查找并集
+
 func main() {
 	nums1, nums2 := []int{4, 9, 5}, []int{9, 4, 9, 8, 4} //创建用于测试的数组
-	result := intersect(nums1, nums2)                    //调用测试
+	result := intersect1(nums1, nums2)                   //调用测试
 	fmt.Println(result)                                  //输出结果
 }
