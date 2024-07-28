@@ -4,24 +4,25 @@ import "fmt"
 
 //数组进行加一的操作，直接找9,根据9的个数不同分别做讨论
 func plusOne(digits []int) []int {
-	n := len(digits)              //获取到长度
-	for i := n - 1; i >= 0; i-- { //从后向前依次遍历
-		if digits[i] != 9 { //找到数组中第一个不为9的元素直接加一
-			digits[i]++ //直接加一
-			for j := i + 1; j < n; j++ {
-				digits[j] = 0
+	//首先获取到数组的长度
+	n := len(digits)
+	for i := n - 1; i >= 0; i-- { //从后向前进行遍历
+		if digits[i] != 9 { //找到第一个不等于9的元素
+			digits[i]++                  //将当前非9的元素加一
+			for j := i + 1; j < n; j++ { //向后遍历如果出现那种199情况直接后面都变成0
+				digits[j] = 0 //后面都为9的情况直接进位后面变零
 			}
 			return digits
 		}
 	}
-	// digits 中所有的元素均为 9
+	//如果出现所有数字都是9的情况直接后面都变零前面变1
 	digits = make([]int, n+1)
-	digits[0] = 1
-	return digits
+	digits[0] = 1 //首位赋值为1
+	return digits //直接返回值
 }
 
 func main() {
-	digits := []int{1, 2, 3}
+	digits := []int{9, 9}
 	result := plusOne(digits)
 	fmt.Println(result)
 }
