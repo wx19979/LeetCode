@@ -97,7 +97,7 @@ func longestCommonPrefix3(strs []string) string {
 }
 
 // 求解字符串数组的最长前缀(二分查找法)
-func longestCommonPrefix(strs []string) string {
+func longestCommonPrefix4(strs []string) string {
 	//首先判断数组是否是空数组
 	count := len(strs)
 	if count == 0 { //如果是空数组返回空串
@@ -143,6 +143,6 @@ func main() {
 	str3 := longestCommonPrefix3(strs3)
 	fmt.Println(str3)
 	strs4 := []string{"flower", "flow", "flight"}
-	str4 := longestCommonPrefix(strs4)
+	str4 := longestCommonPrefix4(strs4)
 	fmt.Println(str4)
 }
