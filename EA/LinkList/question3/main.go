@@ -65,11 +65,10 @@ func reverseList3(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
-	//递归找到链表后面的头节点
-	newHead := reverseList3(head.Next)
-	head.Next.Next = head //改变链表指针朝向
-	head.Next = nil       //将过去的指针报废掉
-	return newHead        //返回新的头节点
+	newHead := reverseList3(head.Next) //递归找到链表后面的头节点
+	head.Next.Next = head              //改变链表指针朝向
+	head.Next = nil                    //将过去的指针报废掉
+	return newHead                     //返回新的头节点
 }
 func main() {
 	list1 := []int{1, 2, 3, 4, 5}
