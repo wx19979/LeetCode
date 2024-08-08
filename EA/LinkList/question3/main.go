@@ -30,10 +30,10 @@ func travelList(L *ListNode) {
 
 //翻转链表函数(利用栈进行操作),这道题有坑head里面是带有数值的,所以想做到和答案相同需要加一个哑巴节点
 func reverseList1(head *ListNode) *ListNode {
-	nodes := []*ListNode{}      //创建一个存储节点的数组
-	dummy := &ListNode{0, head} //创建一个哑巴节点
-	p := dummy.Next             //获取到头节点,从头节点开始向后依次遍历
-	for p != nil {              //开始逐个遍历并且放入栈中
+	nodes := []*ListNode{}         //创建一个存储节点的数组
+	dummy := &ListNode{Next: head} //创建一个哑巴节点
+	p := dummy.Next                //获取到头节点,从头节点开始向后依次遍历
+	for p != nil {                 //开始逐个遍历并且放入栈中
 		nodes = append(nodes, p)
 		p = p.Next
 	}
