@@ -13,9 +13,9 @@ type ListNode struct {
 // 首先先定义一个构建链表的函数
 func createList(list []int) *ListNode {
 	//根据传入的数组list来构建链表
-	head := &ListNode{Next: nil} //首先构建头指针
+	head := &ListNode{list[len(list)-1], nil} //首先构建头指针
 	//遍历list来进行插入操作
-	for i := 0; i < len(list); i++ { //利用头插法初始化链表
+	for i := 0; i < len(list)-1; i++ { //利用头插法初始化链表
 		newNode := &ListNode{Val: list[i], Next: head.Next} //首先构造一个新的节点它的指针指向head的下一个节点
 		head.Next = newNode                                 //然后头部指针的下一个节点指向它
 	}
@@ -24,9 +24,9 @@ func createList(list []int) *ListNode {
 
 // 用于遍历的函数
 func travelList(L *ListNode) {
-	for L.Next != nil {
-		fmt.Println(L.Next.Val) //输出结果
-		L = L.Next              //继续向下遍历
+	for L != nil {
+		fmt.Println(L.Val) //输出结果
+		L = L.Next         //继续向下遍历
 	}
 }
 
