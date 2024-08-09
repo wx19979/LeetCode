@@ -70,6 +70,7 @@ func reverseList3(head *ListNode) *ListNode {
 	head.Next = nil                    //将过去的指针报废掉
 	return newHead                     //返回新的头节点
 }
+
 func main() {
 	list1 := []int{1, 2, 3, 4, 5}
 	ln1 := createList(list1)
