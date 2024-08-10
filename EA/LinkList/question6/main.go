@@ -20,14 +20,6 @@ func createList(list []int) *ListNode {
 	return head //最终返回头部节点
 }
 
-//用于遍历的函数
-func travelList(L *ListNode) {
-	for L != nil {
-		fmt.Println(L.Val) //输出结果
-		L = L.Next         //继续向下遍历
-	}
-}
-
 //计算链表长度的函数
 func lenList(head *ListNode) int {
 	lenList := 0      //创建一个用于存储长度的变量
