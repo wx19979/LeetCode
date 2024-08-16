@@ -1,9 +1,56 @@
 package main
 
+import (
+	"fmt"
+	"strconv"
+)
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
 	Right *TreeNode
+}
+
+// 根据数组创建二叉树(左子树是2i+1,右子树是2i+2)按照层序遍历创建的
+func createBiTree(list []string) *TreeNode {
+	//首先需要创建一个用于存储节点和索引的一个哈希表
+	myTreeMap := map[int]*TreeNode{}
+	if list[0] == "#" {
+		return nil
+	}
+	//开始遍历操作加入索引表中
+	for i := 0; i < len(list); i++ {
+		if list[i] == "#" { //如果当前是空的直接赋值为空
+			myTreeMap[i] = nil
+		} else { //否则说明有数据
+			tdata, _ := strconv.Atoi(list[i])                           //先转换一下
+			myTreeMap[i] = &TreeNode{Left: nil, Right: nil, Val: tdata} //再开始进行赋值
+		}
+	}
+	//从第二个节点开始都是有双亲节点的
+	for i := 1; i < len(list); i++ {
+		fm := (i - 1) / 2 //首先先找到双亲节点的索引
+		if fm*2+1 == i {  //判断当前节点是双亲的左节点还是右节点
+			myTreeMap[fm].Left = myTreeMap[i] //是左侧的就放到双亲节点的左面
+		}
+		if fm*2+2 == i { //如果是右侧节点
+			myTreeMap[fm].Right = myTreeMap[i] //放置到双亲节点右侧
+		}
+	}
+	return myTreeMap[0] //最终返回头一个节点的指针就是根节点
+}
+
+// 进行遍历操作(按照先根序遍历)
+func Travel(bitTree *TreeNode) {
+	if bitTree != nil { //如果当前节点不空
+		fmt.Println(bitTree.Val) //输出结果
+	}
+	if bitTree.Left != nil {
+		Travel(bitTree.Left) //递归遍历左子树
+	}
+	if bitTree.Right != nil {
+		Travel(bitTree.Right) //递归遍历右子树
+	}
 }
 
 // 用于查看是否是对称的树的函数,利用递归的方式进行检查
@@ -54,5 +101,14 @@ func isSymmetric2(root *TreeNode) bool {
 }
 
 func main() {
-
+	mytest1 := []string{"1", "2", "2", "3", "4", "4", "3"}
+	testTree1 := createBiTree(mytest1)
+	Travel(testTree1)
+	isS1 := isSymmetric1(testTree1)
+	fmt.Println(isS1)
+	mytest2 := []string{"1", "2", "2", "#", "3", "#", "3"}
+	testTree2 := createBiTree(mytest2)
+	Travel(testTree2)
+	isS2 := isSymmetric2(testTree2)
+	fmt.Println(isS2)
 }
