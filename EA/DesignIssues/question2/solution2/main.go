@@ -1,3 +1,7 @@
+/*
+增加一个节点结构体,里面存储好数据和当前节点最小值,
+并且需要一个全局最小值与之比较。
+*/
 package main
 
 import (
@@ -62,7 +66,6 @@ func min(a, b int) int {
 }
 
 func main() {
-	fmt.Println(math.MaxInt32)
 	s := Constructor()               //这里直接调用构造函数返回一个预先设定好的对象
 	nums := []int{-1, 2, 10, -5, 9}  //创建一个测试数组
 	for i := 0; i < len(nums); i++ { //将数据都入栈
