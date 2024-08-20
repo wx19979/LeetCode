@@ -10,7 +10,7 @@ func missingNumber(nums []int) int {
 	n_len := len(nums)
 	//根据这个长度创建一个哈希表
 	m_nums := make([]bool, n_len+1)
-	//初始化为false
+	//数组中的所有数值初始化为false
 	for i := 0; i < n_len+1; i++ {
 		m_nums[i] = false
 	}
@@ -20,12 +20,12 @@ func missingNumber(nums []int) int {
 	}
 	//重新遍历哈希表
 	for j := 0; j < n_len+1; j++ {
-		if !m_nums[j] {
-			res = j
-			break
+		if !m_nums[j] { //如果哈希表出现false说明就是确实的元素
+			res = j //把缺失元素的值赋值给结果变量
+			break   //停止循环
 		}
 	}
-	return res
+	return res //返回结果
 }
 func main() {
 	nums := []int{9, 6, 4, 2, 3, 5, 7, 0, 1}
